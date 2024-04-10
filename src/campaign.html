@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PWN : Personal-War-Navigator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <style>
+        .bg-component {
+            background-color: rgba(55, 65, 74, 0.829) !important;
+        }
+    </style>
+</head>
+
+<body class="bg-component">
+
+    <div id="root" class="container-fluid bg-dark bg-component bg-gradient" style="height: 90vh;">
+
+        <!-- Nav Bar -->
+
+        <nav class="navbar fixed-bottom navbar-dark bg-component bg-gradient shadow-lg">
+            <ul class="navbar-nav d-flex flex-row align-items-center justify-content-around shadow-lg w-100 mx-2">
+                <li class="nav-item btn btn-secondary btn-sm">
+                    <a href="commandCenter.html">
+                        <img src="../assets/img/radar_system.png" height="50" width="45" alt="">
+                    </a>
+                </li>
+                <li class="nav-item btn btn-secondary btn-sm">
+                    <a href="campaign.html">
+                        <img src="../assets/img/case.png" height="50" width="45" alt="">
+                    </a>
+                </li>
+                <li class="nav-item btn btn-secondary btn-sm">
+                    <a href="mission.html">
+                        <img src="../assets/img/map.png" height="50" width="45" alt="">
+                    </a>
+                </li>
+                <li class="nav-item btn btn-secondary btn-sm">
+                    <a href="tasks.html">
+                        <img src="../assets/img/army_book.png" height="50" width="45" alt="">
+                    </a>
+                </li>
+                <li class="nav-item btn btn-secondary btn-sm">
+                    <a href="assets.html">
+                        <img src="../assets/img/assets.png" height="50" width="45" alt="">
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Add button -->
+        <nav class="navbar fixed-top bg-component bg-gradient">
+            <ul class="navbar-nav text-warning d-flex flex-row align-items-center justify-content-between w-100 mx-2">
+                <li class="nav-item">
+                    <h1>Campaigns</h1>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-warning  pt-1 rounded-pill" data-bs-toggle="modal"
+                        data-bs-target="#formModal"> + </button>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main -->
+
+        <div class="container-fluid  d-flex justify-content-center" style="margin-top: 75px;">
+            <div id="campaignBar" class="flex-wrap hstack gap-3 mt-3">
+                <div class="card" style="width:22rem;">
+                    <div class="card-body text-light bg-component bg-gradient shadow">
+                        <div class="hstack justify-content-between">
+                            <span class="placeholder col-3 bg-warning"></span>
+                            <span class="placeholder col-3"></span>
+                        </div>
+                        <h6 class="card-subtitle mt-2 mb-2"><span class="placeholder col-3"></span></h6>
+                        <div class="progress mb-2" role="progressbar" aria-label="Animated striped example"
+                            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+
+                        </div>
+                        <div class="mt-3 hstack gap-1">
+                            <a class="btn btn-primary d-inline bg-component disabled placeholder col-6"> </a>
+                            <a class="btn btn-primary d-inline disabled placeholder col-6"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Form -->
+        <div class="modal fade" id="formModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content bg-dark bg-component">
+                    <div class="modal-header">
+                        <h1 class="modal-title text-dark fs-5" id="exampleModalLabel">Add New Campaign</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-light">
+                        <form id="campaignForm" class="form" action="#"
+                            onsubmit="handleCampaignForm(event); return false;">
+                            <label for="campaignName">Campaign Name:</label>
+                            <input type="text" class="form-control" id="campaignName" name="name" required><br>
+                            <label for="campaignDescription">Campaign Description:</label>
+                            <textarea id="campaignDescription" class="form-control" name="description"
+                                required></textarea><br>
+                            <label for="campaignStartDate">Start Date:</label>
+                            <input type="datetime-local" class="form-control" id="campaignStartDate" name="start_date"
+                                required><br>
+                            <label for="campaignEndDate">End Date:</label>
+                            <input type="datetime-local" class="form-control" id="campaignEndDate" name="end_date"
+                                required><br>
+                            <label for="campaignPriority">Priority:</label>
+                            <select id="campaignPriority" class="form-control" name="priority">
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                            </select><br>
+                            <button type="submit" class="form-control btn btn-primary">Create Campaign</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- </div> -->
+
+        <!-- Modal CamapignDetails -->
+        <div class="modal fade" id="campaignDetails" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div id="details" class="modal-content text-dark bg-component">
+                </div>
+            </div>
+        </div>
+
+        <!-- bootstrap js -->
+        <script src="../bootstrap/js/bootstrap.min.js"></script>
+        <script src="/temp_campaign.js"></script>
+</body>
+
+</html>

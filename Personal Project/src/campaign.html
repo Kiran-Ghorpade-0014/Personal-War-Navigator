@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <style>
+        .bg-component {
+            background-color: rgba(55, 65, 74, 0.829) !important;
+        }
+    </style>
+</head>
+
+<body class="bg-component">
+
+    <div id="root" class="container-fluid bg-dark bg-component bg-gradient vh-100">
+
+        <!-- Nav Bar -->
+
+        <nav class="navbar fixed-bottom navbar-dark bg-component bg-gradient shadow-lg">
+            <ul class="navbar-nav d-flex flex-row align-items-center justify-content-around shadow-lg w-100 mx-2">
+                <li class="nav-item btn btn-secondary btn-sm">
+                    <img src="../assets/img/radar_system.png" height="50" width="45" alt="">
+                </li>
+                <li class="nav-item btn btn-secondary btn-sm">
+                    <img src="../assets/img/case.png" height="50" width="45" alt="">
+                </li>
+                <li class="nav-item btn btn-secondary btn-sm">
+                    <img src="../assets/img/map.png" height="50" width="45" alt="">
+                </li>
+                <li class="nav-item btn btn-secondary btn-sm">
+                    <img src="../assets/img/army_book.png" height="50" width="45" alt="">
+                </li>
+
+                <li class="nav-item btn btn-secondary btn-sm">
+                    <img src="../assets/img/assets.png" height="50" width="45" alt="">
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Add button -->
+        <nav class="navbar fixed-top bg-component bg-gradient">
+            <ul class="navbar-nav text-warning d-flex flex-row align-items-center justify-content-between w-100 mx-2">
+                <li class="nav-item">
+                    <h1>Campaigns</h1>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-warning  pt-1 rounded-pill" data-bs-toggle="modal"
+                        data-bs-target="#formModal"> + </button>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main -->
+
+        <div id="campaignBar" class="container-fluid d-flex justify-content-around gap-3 flex-wrap" style="margin-top: 75px;"></div>
+ 
+        <!-- Modal Form -->
+        <div class="modal fade" id="formModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content bg-dark bg-component">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Campaign</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-light">
+                        <form onsubmit="addCampaign()">
+                            Name : <input type="text" id="name" required> <br> <br>
+                            Category: <input type="text" id="category" required> <br> <br>
+                            <button type="submit" class="btn btn-primary">Add Campaign</button>
+                            <button data-bs-dismiss="modal" class="btn btn-secondary">Skip</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal CamapignDetails -->
+    <div class="modal fade" id="campaignDetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark bg-component">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Campaign</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body text-dark bg-component bg-gradient shadow">
+                        <h5 class="card-title">Task 1</h5>
+                        <h6 class="card-subtitle mb-2">@TaskCategory</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's
+                            content.</p>
+                        <a href="#" class="btn btn-primary">Mark Completed</a>
+                        <a href="#" class="btn btn-secondary">Skip</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- bootstrap js -->
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../src/js/campaign.js"></script>
+</body>
+
+</html>
