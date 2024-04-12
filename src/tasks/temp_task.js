@@ -221,8 +221,8 @@ function processCards() {
     campaign.missions.forEach((mission) => {
       mission.tasks.forEach((task) => {
         cards += `
-            <div class="card" style="width:22rem;">
-                <div class="card-body text-dark bg-component bg-gradient shadow">
+            <div class="card bg-component" style="width:22rem;">
+                <div class="card-body text-dark shadow">
                     <div class="d-flex align-items-center justify-content-between">
                         <h5 class="card-title" data-bs-toggle="modal" data-bs-target="#campaignDetails"> ${
                           task.name
@@ -235,9 +235,9 @@ function processCards() {
                         <div class="mt-2 hstack gap-2 justify-content-around">
                             <button class="d-inline btn btn-sm btn-dark" onClick="handleDeleteClick(${campaignsData.indexOf(campaign)}, ${campaign.missions.indexOf(mission)}, ${mission.tasks.indexOf(task)})"> 🗑️ </button>
                             <button class="d-inline btn btn-sm btn-light"> ✏️ </button>
-                            <button class="btn btn-sm btn-warning">Report Status</button>
                         </div>
                     </div>
+                    <button class="btn btn-sm btn-warning ">Report Status</button>
                 </div>
             </div>
    `;

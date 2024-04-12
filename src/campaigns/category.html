@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PWN : Personal-War-Navigator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <style>
+        .bg-component {
+            background-color: rgba(55, 65, 74, 0.829) !important;
+            color: white !important;
+        }
+    </style>
+</head>
+
+<body class="bg-component">
+
+    <div id="root" class="container-fluid bg-dark bg-component bg-gradient" style="height: 90vh;">
+
+        <!-- Nav Bar -->
+
+        <nav class="navbar fixed-bottom navbar-dark bg-component bg-gradient shadow-lg">
+            <ul class="navbar-nav d-flex flex-row align-items-center justify-content-around shadow-lg w-100 mx-2">
+                <li class="nav-item btn btn-secondary btn-sm">
+                    <a href="../command/commandCenter.html">
+                        <img src="/assets/img/radar_system.png" height="50" width="45" alt="">
+                    </a>
+                </li>
+                <li class="nav-item btn btn-secondary btn-sm">
+                    <a href="../campaigns/campaign.html">
+                        <img src="/assets/img/case.png" height="50" width="45" alt="">
+                    </a>
+                </li>
+                <li class="nav-item btn btn-secondary btn-sm">
+                    <a href="../missions/mission.html">
+                        <img src="/assets/img/map.png" height="50" width="45" alt="">
+                    </a>
+                </li>
+                <li class="nav-item btn btn-secondary btn-sm">
+                    <a href="../tasks/tasks.html">
+                        <img src="/assets/img/army_book.png" height="50" width="45" alt="">
+                    </a>
+                </li>
+                <li class="nav-item btn btn-secondary btn-sm">
+                    <a href="../supplies/assets.html">
+                        <img src="/assets/img/assets.png" height="50" width="45" alt="">
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Add button -->
+        <nav class="navbar fixed-top bg-component bg-gradient">
+            <ul class="navbar-nav text-warning d-flex flex-row align-items-center justify-content-between w-100 mx-2">
+                <li class="nav-item">
+                    <h1>Campaign Categories</h1>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-warning  pt-1 rounded-pill" data-bs-toggle="modal"
+                        data-bs-target="#formModal"> + </button>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main -->
+        <div class="container-fluid vstack gap-2 " style="margin-top: 75px;"> 
+            
+            <div class="btn btn-lg hstack justify-content-between text-start text-light bg-component shadow">
+                <h4 href="../tasks/category.html" class=" text-start fw-bold"> Global </h4>
+                <div class="hstack gap-2 justify-content-around">
+                    <button class="d-inline btn btn-sm btn-light"> ✏️ </button>
+                    <button class="d-inline btn btn-sm btn-dark"> 🗑️ </button>
+                </div>
+            </div>
+
+            <div class="btn btn-lg hstack justify-content-between text-start text-light bg-component shadow">
+                <h4 href="../tasks/category.html" class=" text-start fw-bold"> Joint </h4>
+                <div class="hstack gap-2 justify-content-around">
+                    <button class="d-inline btn btn-sm btn-light"> ✏️ </button>
+                    <button class="d-inline btn btn-sm btn-dark"> 🗑️ </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Form -->
+        <div class="modal fade" id="formModal" tabindex="-1"  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content bg-component">
+                    <div class="modal-body text-light">
+                        <form id="categoryForm" class="form text-light" action="#"
+                            onsubmit="handleCategoryForm(event); return false;">
+                            <label for="categoryName">Category Name:</label>
+                            <input type="text" class="form-control" id="categoryName" name="name" required><br>
+                            <button type="submit" class="form-control btn btn-primary">Create Category</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- </div> -->
+
+        <!-- Modal CamapignDetails -->
+        <div class="modal fade" id="categoryDetails" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div id="details" class="modal-content text-dark bg-component">
+                </div>
+            </div>
+        </div>
+
+        <!-- bootstrap js -->
+        <script src="/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../campaigns/temp_category.js"></script>
+</body>
+
+</html>

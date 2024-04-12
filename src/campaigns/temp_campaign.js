@@ -139,8 +139,8 @@ function processCards() {
   cards = "";
   campaignsData.forEach((campaign) => {
     cards += `
-            <div class="card" style="width:22rem;">
-                <div class="card-body vstack gap-2 text-light bg-component bg-gradient shadow">
+            <div class="card bg-component" style="width:22rem;">
+                <div class="card-body vstack gap-2 text-light shadow">
                     <div class="hstack justify-content-between">
                         <h5 onclick="showCampaignDetails(${campaignsData.indexOf(campaign)})" class="card-title" data-bs-toggle="modal" data-bs-target="#campaignDetails"> ${
                           campaign.name

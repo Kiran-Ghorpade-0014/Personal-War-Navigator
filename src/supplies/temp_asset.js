@@ -152,15 +152,15 @@ function processCards() {
        
     }
     cards += `
-              <div class="card" style="width: 10rem;">
-                    <div class="card-body vstack gap-2 text-dark bg-component bg-gradient shadow">
+              <div class="card bg-component" style="width: 10rem;">
+                    <div class="card-body vstack gap-2 text-light shadow">
                         <div class="hstack gap-2 justify-content-around">
-                            <h5 class="card-title text-center"> ${asset.name} </h5>
+                            <h5 class="card-title text-light text-center"> ${asset.name} </h5>
                             <span class="card-subtitle text-light text-center"> ${asset.currentstock}/${asset.totalstock} </span>
                         </div>
                        <!-- <div class="hstack gap-2 justify-content-around">
                             <span class="card-subtitle text-center"> Stock : ${(currentPercentage>0) ? currentPercentage+'%' :'⚠️'}</span>
-                            <span class="card-subtitle text-dark text-center"> Time : ${(deadlinePercentage>0) ? deadlinePercentage+'%' :'⚠️'}</span>
+                            <span class="card-subtitle text-light text-center"> Time : ${(deadlinePercentage>0) ? deadlinePercentage+'%' :'⚠️'}</span>
                         </div> -->
                         <div class="progress" role="progressbar" aria-label="Animated striped example"
                         aria-valuenow="${currentPercentage}" style="height: 0.5rem;" aria-valuemin="0" aria-valuemax="100">
@@ -169,7 +169,7 @@ function processCards() {
                         <div class="progress text-center" role="progressbar" aria-label="Animated striped example"
                         aria-valuenow="${deadlinePercentage}" style="height: 0.5rem;" aria-valuemin="10" aria-valuemax="100">
                             <div class="progress-bar bg-primary" style="width: ${deadlinePercentage}%;"></div>
-                        </div>    
+                        </div>
                         <div class="hstack gap-2 justify-content-around">
                             <button class="d-inline btn btn-sm btn-light"> ✏️ </button>
                             <button class="d-inline btn btn-sm btn-dark"> 🗑️ </button>
@@ -188,7 +188,7 @@ function showAssetDetails(AssetId) {
 
   let modal = `
               <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel">${Asset.name}</h1>
+                      <h1 class="modal-title text-light fs-5" id="exampleModalLabel">${Asset.name}</h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">

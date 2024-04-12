@@ -6,7 +6,7 @@
     <title>PWN : Personal-War-Navigator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- bootstrap css -->
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <style>
         .bg-component {
             background-color: rgba(55, 65, 74, 0.829) !important;
@@ -24,42 +24,43 @@
         <nav class="navbar fixed-bottom navbar-dark bg-component bg-gradient shadow-lg">
             <ul class="navbar-nav d-flex flex-row align-items-center justify-content-around shadow-lg w-100 mx-2">
                 <li class="nav-item btn btn-secondary btn-sm">
-                    <a href="commandCenter.html">
-                        <img src="../assets/img/radar_system.png" height="50" width="45" alt="">
+                    <a href="../command/commandCenter.html">
+                        <img src="/assets/img/radar_system.png" height="50" width="45" alt="">
                     </a>
                 </li>
                 <li class="nav-item btn btn-secondary btn-sm">
-                    <a href="campaign.html">
-                        <img src="../assets/img/case.png" height="50" width="45" alt="">
+                    <a href="../campaigns/campaign.html">
+                        <img src="/assets/img/case.png" height="50" width="45" alt="">
                     </a>
                 </li>
                 <li class="nav-item btn btn-secondary btn-sm">
-                    <a href="mission.html">
-                        <img src="../assets/img/map.png" height="50" width="45" alt="">
+                    <a href="../missions/mission.html">
+                        <img src="/assets/img/map.png" height="50" width="45" alt="">
                     </a>
                 </li>
                 <li class="nav-item btn btn-secondary btn-sm">
-                    <a href="tasks.html">
-                        <img src="../assets/img/army_book.png" height="50" width="45" alt="">
+                    <a href="../tasks/tasks.html">
+                        <img src="/assets/img/army_book.png" height="50" width="45" alt="">
                     </a>
                 </li>
 
                 <li class="nav-item btn btn-secondary btn-sm">
-                    <a href="assets.html">
-                        <img src="../assets/img/assets.png" height="50" width="45" alt="">
+                    <a href="../supplies/assets.html">
+                        <img src="/assets/img/assets.png" height="50" width="45" alt="">
                     </a>
                 </li>
             </ul>
         </nav>
-
+        
         <!-- Main -->
-
+        
         <h1 class="text-warning text-center mt-3">Personal-War-Navigator</h1>
         <p class="text-warning text-center">Hey cybernaut, be ready . . .</p>
-        <div id="campaignBar" class="container-fluid d-flex justify-content-around align-items-center flex-wrap"
-            style="margin-top: 25px;">
-            <div class="card">
-                <div class="card-body text-dark bg-component bg-gradient shadow">
+        <div id="campaignBar" class="container-fluid vstack gap-2 justify-content-around"
+        style="margin-top: 25px;">
+            <a href="../command/manage.html" class="btn btn-lg bg-component text-start fw-bold"> 🧭 Manage Categories</a>
+            <div class="card bg-component">
+                <div class="card-body text-light shadow">
                     <div class="d-flex align-items-center justify-content-between">
                         <h5 class="card-title" data-bs-toggle="modal" data-bs-target="#campaignDetails"> ${task.name}
                         </h5>
@@ -84,27 +85,28 @@
             </div>
         </div>
 
+
         <div class="d-flex align-items-evenly justify-content-evenly flex-wrap gap-3 mt-5">
-            <div class="card" style="width: 10rem;">
-                <div class="card-body text-dark bg-component bg-gradient shadow">
+            <div class="card bg-component" style="width: 10rem;">
+                <div class="card-body text-light shadow">
                     <h5 class="card-title text-center"> Supply Status </h5>
                     <h6 class="card-subtitle mt-4 text-warning text-center"> Good </h6>
                 </div>
             </div>
-            <div class="card" style="width: 10rem;">
-                <div class="card-body text-dark bg-component bg-gradient shadow">
+            <div class="card bg-component" style="width: 10rem;">
+                <div class="card-body text-light shadow">
                     <h5 class="card-title text-center"> Time Status </h5>
                     <h6 class="card-subtitle mt-4 text-warning text-center"> Good </h6>
                 </div>
             </div>
-            <div class="card" style="width: 10rem;">
-                <div class="card-body text-dark bg-component bg-gradient shadow">
+            <div class="card bg-component" style="width: 10rem;">
+                <div class="card-body text-light shadow">
                     <h5 class="card-title text-center"> Funds Status </h5>
                     <h6 class="card-subtitle mt-4 text-warning text-center"> Good </h6>
                 </div>
             </div>
-            <div class="card" style="width: 10rem;">
-                <div class="card-body text-dark bg-component bg-gradient shadow">
+            <div class="card bg-component" style="width: 10rem;">
+                <div class="card-body text-light shadow">
                     <h5 class="card-title text-center"> Funds Status </h5>
                     <h6 class="card-subtitle mt-4 text-warning text-center"> Good </h6>
                 </div>
@@ -156,7 +158,7 @@
     </div>
 
     <!-- bootstrap js -->
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>

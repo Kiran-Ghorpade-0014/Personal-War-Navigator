@@ -170,8 +170,8 @@ function processCards() {
   campaignsData.forEach((campaign) => {
     campaign.missions.forEach((mission) => {
       cards += `
-            <div class="card" style="width:22rem;">
-                <div class="card-body vstack gap-2 text-dark bg-component bg-gradient shadow">
+            <div class="card  bg-component" style="width:22rem;">
+                <div class="card-body vstack gap-2 text-dark shadow">
                     <div class="hstack gap-2 justify-content-between">
                         <h5 class="card-title" data-bs-toggle="modal" data-bs-target="#campaignDetails"> ${
                           mission.name
