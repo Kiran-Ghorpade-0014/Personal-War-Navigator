@@ -157,7 +157,6 @@ function handleTaskFormSubmit(event) {
   const formData = new FormData(form);
   const newTask = {};
   newTask.status = "";
-  newTask.note = "";
   // newTask.start_time = new Date();
 
   formData.forEach((value, key) => {
@@ -204,12 +203,16 @@ function handleDeleteClick(key, missionkey, taskindex) {
 // HTML management
 
 const tasksBar = document.getElementById("tasksBar");
+let cache_element = '';
 
 function render() {
   let element = processCards();
+  if(cache_element == element){
+    return;
+  }
   tasksBar.innerHTML = element;
+  cache_element = element;
 }
-
 function processCards() {
   let campaignsData = readAllItems("campaigns");
 
@@ -225,17 +228,15 @@ function processCards() {
                           task.name
                         }
                         </h5>
-                        <div class="card-title h6"> Status : ${
-                          task.status ? task.status : "🔴 None"
-                        }</div>
+                        <h6 class="card-subtitle">@${mission.name}</h6>
                     </div>
-                    <h6 class="card-subtitle mb-1">@${task.priority}</h6>
-                    <div class="mt-2 d-flex flex-wrap gap-1 justify-content-around">
-                    <button class="btn btn-small btn-primary bg-component" onClick="handleDeleteClick(${campaignsData.indexOf(
-                      campaign
-                    )}, ${campaign.missions.indexOf(mission)}, ${mission.tasks.indexOf(task)})"> Delete </button>
-                        <button class="btn btn-small btn-warning">Report Status</button>
-                        <button class="btn btn-small btn-primary">Update</button>
+                    <div class="hstack justify-content-between">
+                        <div class="card-title h6"> Status : ${task.status ? task.status : "🔴 None"} </div>
+                        <div class="mt-2 hstack gap-2 justify-content-around">
+                            <button class="d-inline btn btn-sm btn-dark" onClick="handleDeleteClick(${campaignsData.indexOf(campaign)}, ${campaign.missions.indexOf(mission)}, ${mission.tasks.indexOf(task)})"> 🗑️ </button>
+                            <button class="d-inline btn btn-sm btn-light"> ✏️ </button>
+                            <button class="btn btn-sm btn-warning">Report Status</button>
+                        </div>
                     </div>
                 </div>
             </div>

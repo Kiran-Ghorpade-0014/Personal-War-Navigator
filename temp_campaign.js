@@ -82,8 +82,6 @@ function handleCampaignForm(event) {
   const formData = new FormData(form);
   const newCampaign = {};
   newCampaign.status = "";
-  newCampaign.note = "";
-  newCampaign.resources = {};
   newCampaign.missions = [];
   newCampaign.progress = {};
 
@@ -124,10 +122,15 @@ function handleDeleteClick(key) {
 // HTML management
 
 const campaignBar = document.getElementById("campaignBar");
+let cache_element = '';
 
 function render() {
   let element = processCards();
+  if(cache_element == element){
+    return;
+  }
   campaignBar.innerHTML = element;
+  cache_element = element;
 }
 
 function processCards() {
@@ -137,26 +140,27 @@ function processCards() {
   campaignsData.forEach((campaign) => {
     cards += `
             <div class="card" style="width:22rem;">
-                <div class="card-body text-light bg-component bg-gradient shadow">
+                <div class="card-body vstack gap-2 text-light bg-component bg-gradient shadow">
                     <div class="hstack justify-content-between">
                         <h5 onclick="showCampaignDetails(${campaignsData.indexOf(campaign)})" class="card-title" data-bs-toggle="modal" data-bs-target="#campaignDetails"> ${
                           campaign.name
                         }
                         </h5>
+                        <h6 class="card-subtitle mb-2">@${campaign.priority}</h6>
+                    </div>
+                    <div class="hstack justify-content-between">
                         <div class="card-title h6"> Status : ${
                           campaign.status ? campaign.status : "🔴 None"
                         }</div>
+                        <div class="hstack gap-2 justify-content-around">
+                            <button class="d-inline btn btn-sm btn-light"> ✏️ </button>
+                            <button class="d-inline btn btn-sm btn-dark" onClick="handleDeleteClick(${campaignsData.indexOf(campaign)})"> 🗑️ </button>
+                        </div>
                     </div>
-                    <h6 class="card-subtitle mb-2">@${campaign.priority}</h6>
-                    <div class="progress mb-2" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-bar bg-danger" style="width: 75%;">75%</div>
-                    </div>
-                    <div class="mt-3 d-flex flex-wrap gap-3 justify-content-around">
-                        <button class="btn btn-primary bg-component" onClick="handleDeleteClick(${campaignsData.indexOf(
-                          campaign
-                        )})"> Delete </button>
-                        <button class="btn btn-primary" onClick="handleUpdateClick()">Update</button>
-                    </div>
+                    <div class="progress  text-center" role="progressbar" aria-label="Animated striped example"
+                    aria-valuenow="75" aria-valuemin="10" style="height: 0.5rem;" aria-valuemax="100">
+                        <div class="progress-bar bg-warning" style="width: 75%;">75%</div>
+                    </div> 
                 </div>
             </div>
    `;

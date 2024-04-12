@@ -113,8 +113,6 @@ function handleMissionForm(event) {
   const formData = new FormData(form);
   const newMission = {};
   newMission.status = "";
-  newMission.note = "";
-  newMission.resources = {};
   newMission.tasks = [];
   newMission.progress = {};
 
@@ -154,10 +152,15 @@ function handleDeleteClick(key, missionkey) {
 // HTML management
 
 const missionBar = document.getElementById("missionBar");
+let cache_element = '';
 
 function render() {
   let element = processCards();
+  if(cache_element == element){
+    return;
+  }
   missionBar.innerHTML = element;
+  cache_element = element;
 }
 
 function processCards() {
@@ -168,27 +171,27 @@ function processCards() {
     campaign.missions.forEach((mission) => {
       cards += `
             <div class="card" style="width:22rem;">
-                <div class="card-body text-dark bg-component bg-gradient shadow">
-                    <div class="hstack justify-content-between">
+                <div class="card-body vstack gap-2 text-dark bg-component bg-gradient shadow">
+                    <div class="hstack gap-2 justify-content-between">
                         <h5 class="card-title" data-bs-toggle="modal" data-bs-target="#campaignDetails"> ${
                           mission.name
                         }
                         </h5>
+                        <h6 class="card-subtitle ">@${campaign.name}</h6>
+                    </div>
+                    <div class="hstack justify-content-between">
                         <div class="card-title h6"> Status : ${
                           mission.status ? mission.status : "🔴 None"
                         }</div>
+                        <div class="hstack gap-2 justify-content-around">
+                            <button class="d-inline btn btn-sm btn-light"> ✏️ </button>
+                            <button class="d-inline btn btn-sm btn-dark" onClick="handleDeleteClick(${campaignsData.indexOf(campaign)}, ${campaign.missions.indexOf(mission)})"> 🗑️ </button>
+                        </div>
                     </div>
-                    <h6 class="card-subtitle mb-2">@${mission.priority}</h6>
-                    <div class="progress mt-2 text-center" role="progressbar" aria-label="Animated striped example"
-                    aria-valuenow="75" aria-valuemin="10" aria-valuemax="100">
-                        <div class="progress-bar bg-primary" style="width: 75%;">75%</div>
+                    <div class="progress  text-center" role="progressbar" aria-label="Animated striped example"
+                    aria-valuenow="75" aria-valuemin="10" style="height: 0.5rem;" aria-valuemax="100">
+                        <div class="progress-bar bg-warning" style="width: 75%;">75%</div>
                     </div>   
-                    <div class="mt-2 d-flex flex-wrap gap-1 justify-content-around">
-                    <button class="btn btn-small btn-primary bg-component" onClick="handleDeleteClick(${campaignsData.indexOf(
-                      campaign
-                    )}, ${campaign.missions.indexOf(mission)})"> Delete </button>
-                        <button class="btn btn-small btn-primary">Update</button>
-                    </div>
                 </div>
             </div>
    `;

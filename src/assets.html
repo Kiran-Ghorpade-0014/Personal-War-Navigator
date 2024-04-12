@@ -10,6 +10,7 @@
     <style>
         .bg-component {
             background-color: rgba(55, 65, 74, 0.829) !important;
+            color: white !important;
         }
     </style>
 </head>
@@ -107,9 +108,9 @@
     <div class="modal fade" id="formModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content bg-dark bg-component">
+            <div class="modal-content bg-component">
                 <div class="modal-header">
-                    <h1 class="modal-title text-dark fs-5" id="exampleModalLabel">Add New asset</h1>
+                    <h1 class="modal-title text-light fs-5" id="exampleModalLabel">Add New asset</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-light">
@@ -118,10 +119,12 @@
                         <input type="text" class="form-control" id="assetName" name="name" required><br>
                         <label for="assetDescription">Asset Description:</label>
                         <textarea id="assetDescription" class="form-control" name="description" required></textarea><br>
-                        <label for="totalstock">Total Stock</label>
+                        <label for="totalstock">Current Stock</label>
                         <input type="text" class="form-control" id="totalstock" name="totalstock" required><br>
                         <label for="minimumStockLevel">Minimum Stock Level</label>
                         <input type="text" class="form-control" id="minimumStockLevel" name="minimumStockLevel" required><br>
+                        <label for="unit"> Unit</label>
+                        <input type="text" class="form-control" id="unit" name="unit" required><br>
                         <label for="location">End Time</label>
                         <input type="datetime-local" class="form-control" id="end_time" name="end_time" required><br>
                         <label for="location">Location for storage</label>

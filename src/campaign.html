@@ -10,6 +10,7 @@
     <style>
         .bg-component {
             background-color: rgba(55, 65, 74, 0.829) !important;
+            color: white !important;
         }
     </style>
 </head>
@@ -91,13 +92,13 @@
         <div class="modal fade" id="formModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content bg-dark bg-component">
+                <div class="modal-content bg-component">
                     <div class="modal-header">
-                        <h1 class="modal-title text-dark fs-5" id="exampleModalLabel">Add New Campaign</h1>
+                        <h1 class="modal-title text-light fs-5" id="exampleModalLabel">Add New Campaign</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body text-light">
-                        <form id="campaignForm" class="form" action="#"
+                        <form id="campaignForm" class="form text-light" action="#"
                             onsubmit="handleCampaignForm(event); return false;">
                             <label for="campaignName">Campaign Name:</label>
                             <input type="text" class="form-control" id="campaignName" name="name" required><br>

@@ -120,11 +120,17 @@ function handleDeleteClick(key) {
 // HTML management
 
 const AssetBar = document.getElementById("assetBar");
+let cache_element = '';
 
 function render() {
   let element = processCards();
+  if(cache_element == element){
+    return;
+  }
   AssetBar.innerHTML = element;
+  cache_element = element;
 }
+
 
 function processCards() {
   let assetsData = readAllAssets();
@@ -147,21 +153,27 @@ function processCards() {
     }
     cards += `
               <div class="card" style="width: 10rem;">
-                    <div class="card-body vstack gap-1 text-dark bg-component bg-gradient shadow">
-                        <h5 class="card-title text-center"> 
-                        ${asset.name} 
-                        <span class="card-subtitle text-warning text-center"> ${asset.currentstock}/${asset.totalstock} </span>
-                        </h5>
-                        <button class="btn btn-sm btn-warning">Update Asset</button>
+                    <div class="card-body vstack gap-2 text-dark bg-component bg-gradient shadow">
+                        <div class="hstack gap-2 justify-content-around">
+                            <h5 class="card-title text-center"> ${asset.name} </h5>
+                            <span class="card-subtitle text-light text-center"> ${asset.currentstock}/${asset.totalstock} </span>
+                        </div>
+                       <!-- <div class="hstack gap-2 justify-content-around">
+                            <span class="card-subtitle text-center"> Stock : ${(currentPercentage>0) ? currentPercentage+'%' :'⚠️'}</span>
+                            <span class="card-subtitle text-dark text-center"> Time : ${(deadlinePercentage>0) ? deadlinePercentage+'%' :'⚠️'}</span>
+                        </div> -->
                         <div class="progress" role="progressbar" aria-label="Animated striped example"
-                        aria-valuenow="${currentPercentage}" aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar bg-success" style="width: ${currentPercentage}%;">${currentPercentage}%</div>
+                        aria-valuenow="${currentPercentage}" style="height: 0.5rem;" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar bg-success" style="width: ${currentPercentage}%;"></div>
                         </div>    
                         <div class="progress text-center" role="progressbar" aria-label="Animated striped example"
-                        aria-valuenow="${deadlinePercentage}" aria-valuemin="10" aria-valuemax="100">
-                            <div class="progress-bar bg-primary" style="width: ${deadlinePercentage}%;">${deadlinePercentage}%</div>
-                            ${(deadlinePercentage>0) ? "":'⚠️'}
+                        aria-valuenow="${deadlinePercentage}" style="height: 0.5rem;" aria-valuemin="10" aria-valuemax="100">
+                            <div class="progress-bar bg-primary" style="width: ${deadlinePercentage}%;"></div>
                         </div>    
+                        <div class="hstack gap-2 justify-content-around">
+                            <button class="d-inline btn btn-sm btn-light"> ✏️ </button>
+                            <button class="d-inline btn btn-sm btn-dark"> 🗑️ </button>
+                        </div>
                     </div>
                 </div>
      `;
