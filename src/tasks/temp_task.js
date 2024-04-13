@@ -11,6 +11,11 @@ function readAllItems(collection) {
   return JSON.parse(localStorage.getItem(collection)) || [];
 }
 
+// Function to read all items from the specified collection
+function filterByProperty(collection, property, value) {
+  return collection.filter((mission) => mission[property] === value);
+}
+
 // Function to update a specific property of an item in the specified collection
 function updateItemProperty(collection, itemIndex, property, value) {
   let items = JSON.parse(localStorage.getItem(collection)) || [];
@@ -44,109 +49,75 @@ function setNestedProperty(obj, path, value) {
   obj[path.pop()] = value;
 }
 
+function populateDropdown(element_id, collection) {
+  const collectionSelect = document.getElementById(element_id);
+  collectionSelect.innerHTML = "";
+  let collectionData = [];
+
+  // Assume storagesData is an array of storage objects fetched from localStorage
+  // if collection is string , fetch from string
+  if (collection instanceof String || typeof collection === 'string') {
+    collectionData = readAllItems(collection);
+  } else {
+    collectionData = collection;
+  }
+
+  collectionData.forEach((item) => {
+    const option = document.createElement("option");
+    option.value = item.name; // Set value as unique identifier for easy retrieval
+    option.textContent = item.name;
+    collectionSelect.appendChild(option);
+  });
+}
+
 // ---------------------------------------------------------------------------------------------
 // tasks.js
 
 // Function to create a new task for a mission
-function createTask(campaignIndex, missionIndex, newTask) {
-  let campaigns = readAllItems("campaigns");
-
-  if (campaigns[campaignIndex]?.missions[missionIndex]) {
-    let missions = campaigns[campaignIndex].missions;
-    missions[missionIndex].tasks.push(newTask);
-
-    updateItemProperty("campaigns", campaignIndex, "missions", missions);
-  } else {
-    console.error(
-      `Task at index ${taskIndex} in Mission at index ${missionIndex} not found in campaign at index ${campaignIndex}.`
-    );
-  }
-
+function createTask(newTask) {
+  createItem("tasks", newTask);
   render();
 }
 
-// Function to read all tasks of a mission
-function readAllTasks(campaignIndex, missionIndex) {
-  let campaigns = readAllItems("campaigns");
-  return campaigns[campaignIndex]?.missions[missionIndex]?.tasks || [];
+// Function to read all Tasks
+function readAllCategories() {
+  return readAllItems("tasks");
 }
 
-// Function to update a specific property of a task
-function updateTaskProperty(
-  campaignIndex,
-  missionIndex,
-  taskIndex,
-  property,
-  value
-) {
-  updateItemProperty(
-    "campaigns",
-    campaignIndex,
-    `missions[${missionIndex}].tasks[${taskIndex}].${property}`,
-    value
-  );
+// Function to update a specific property of a Task
+function updateTaskProperty(taskIndex, event) {
+  event.preventDefault();
+  let value = document.forms["updateTaskForm"]["name"].value;
+  console.log(value);
+  updateItemProperty("tasks", taskIndex, "name", value);
   render();
 }
 
-// Function to delete a task from a mission
-function deleteTask(campaignIndex, missionIndex, taskIndex) {
-  let campaigns = readAllItems("campaigns");
-
-  if (campaigns[campaignIndex]?.missions[missionIndex]) {
-    let missions = campaigns[campaignIndex].missions;
-    missions[missionIndex].tasks.splice(taskIndex, 1);
-
-    updateItemProperty("campaigns", campaignIndex, "missions", missions);
-  } else {
-    console.error(
-      `Task at index ${taskIndex} in Mission at index ${missionIndex} not found in campaign at index ${campaignIndex}.`
-    );
-  }
-
+// Function to delete a task
+function deleteTask(taskIndex) {
+  deleteItem("tasks", taskIndex);
   render();
-}
-
-function populateCampaignsDropdown() {
-  const campaignSelect = document.getElementById("campaignSelect");
-  //campaignsData is an array of campaign objects fetched from localStorage
-  let campaignsData = readAllItems("campaigns");
-
-  campaignsData.forEach((campaign, index) => {
-    const option = document.createElement("option");
-    option.value = index.toString(); // Set value as index for easy retrieval
-    option.textContent = campaign.name;
-    campaignSelect.appendChild(option);
-  });
 }
 
 function populateMissionsDropdown() {
-  const selectedCampaignIndex = parseInt(
-    document.getElementById("campaignSelect").value
-  );
-  const missionSelect = document.getElementById("missionSelect");
-  missionSelect.innerHTML = ""; // Clear previous options
-  // Assume campaignsData is an array of campaign objects fetched from localStorage
-  let campaignsData = readAllItems("campaigns");
+  // Assume storagesData is an array of storage objects fetched from localStorage
+  const missions = readAllItems("missions");
 
-  campaignsData[selectedCampaignIndex].missions.forEach((mission, index) => {
-    const option = document.createElement("option");
-    option.value = index.toString(); // Set value as index for easy retrieval
-    option.textContent = mission.name;
-    missionSelect.appendChild(option);
-  });
-}
+  const selectedCampaignIndex = document.getElementById("campaignSelect");
 
-function populateAssetsDropdown() {
-  const assetSelect = document.getElementById("assetSelect");
-  // Assume assetsData is an array of asset objects fetched from localStorage
-  const assetsData = readAllItems('assets');
+  // collectionData = missions.filter(mission => mission.campaign === 'Avengers');
+  if (selectedCampaignIndex) {
+    let missionsData = filterByProperty(
+      missions,
+      "campaign",
+      selectedCampaignIndex.value
+    );
 
-  assetsData.forEach((asset) => {
-    const option = document.createElement("option");
-    option.value = asset.id; // Set value as unique identifier for easy retrieval
-    option.textContent = asset.name;
-    assetSelect.appendChild(option);
-  });
+    populateDropdown("missionSelect", missionsData);
+    return;
+  }
+
+  populateDropdown("missionSelect", "missions");
 }
 
 // Handle Form Input
@@ -163,16 +134,12 @@ function handleTaskFormSubmit(event) {
     newTask[key] = value;
   });
 
-  const campaignIndex = parseInt(
-    document.getElementById("campaignSelect").value
-  );
-  const missionIndex = parseInt(document.getElementById("missionSelect").value);
-  createTask(campaignIndex, missionIndex, newTask);
+  createTask(newTask);
 
   form.reset();
 }
 
-function handleDeleteClick(key, missionkey, taskindex) {
+function handleDeleteClick(taskindex) {
   let value = confirm("Are you sure to stop this Task !!!");
 
   if (value == true) {
@@ -190,7 +157,7 @@ function handleDeleteClick(key, missionkey, taskindex) {
           ) ||
           -1 == missionkey + key + taskindex
         ) {
-          deleteTask(key, missionkey, taskindex);
+          deleteTask(taskindex);
           alert("Command Executed : Task Stopped...");
         } else alert("Command to Stop Task Aborted...");
       }
@@ -203,24 +170,22 @@ function handleDeleteClick(key, missionkey, taskindex) {
 // HTML management
 
 const tasksBar = document.getElementById("tasksBar");
-let cache_element = '';
+let cache_element = "";
 
 function render() {
   let element = processCards();
-  if(cache_element == element){
+  if (cache_element == element) {
     return;
   }
   tasksBar.innerHTML = element;
   cache_element = element;
 }
 function processCards() {
-  let campaignsData = readAllItems("campaigns");
+  let tasksData = readAllItems("tasks");
 
   cards = "";
-  campaignsData.forEach((campaign) => {
-    campaign.missions.forEach((mission) => {
-      mission.tasks.forEach((task) => {
-        cards += `
+  tasksData.forEach((task) => {
+    cards += `
             <div class="card bg-component" style="width:22rem;">
                 <div class="card-body text-dark shadow">
                     <div class="d-flex align-items-center justify-content-between">
@@ -228,12 +193,16 @@ function processCards() {
                           task.name
                         }
                         </h5>
-                        <h6 class="card-subtitle">@${mission.name}</h6>
+                        <h6 class="card-subtitle">@${task.mission}</h6>
                     </div>
                     <div class="hstack justify-content-between">
-                        <div class="card-title h6"> Status : ${task.status ? task.status : "🔴 None"} </div>
+                        <div class="card-title h6"> Status : ${
+                          task.status ? task.status : "🔴 None"
+                        } </div>
                         <div class="mt-2 hstack gap-2 justify-content-around">
-                            <button class="d-inline btn btn-sm btn-dark" onClick="handleDeleteClick(${campaignsData.indexOf(campaign)}, ${campaign.missions.indexOf(mission)}, ${mission.tasks.indexOf(task)})"> 🗑️ </button>
+                            <button class="d-inline btn btn-sm btn-dark" onClick="handleDeleteClick(${tasksData.indexOf(
+                              task
+                            )})"> 🗑️ </button>
                             <button class="d-inline btn btn-sm btn-light"> ✏️ </button>
                         </div>
                     </div>
@@ -241,16 +210,15 @@ function processCards() {
                 </div>
             </div>
    `;
-      });
-    });
   });
 
   return cards;
 }
 
-render_reset = setInterval(()=>{
+render_reset = setInterval(() => {
   render();
-},1000)
+}, 1000);
 
-populateCampaignsDropdown();
-populateAssetsDropdown();
+populateDropdown("campaignSelect", "campaigns");
+populateDropdown("assetSelect", "assets");
+populateMissionsDropdown();

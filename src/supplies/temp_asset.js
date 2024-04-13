@@ -45,6 +45,20 @@ function setNestedProperty(obj, path, value) {
   obj[path.pop()] = value;
 }
 
+function populateDropdown(element_id, collection) {
+  const collectionSelect = document.getElementById(element_id);
+  // Assume storagesData is an array of storage objects fetched from localStorage
+  const storagesData = readAllItems(collection);
+
+  storagesData.forEach((storage) => {
+    const option = document.createElement("option");
+    option.value = storage.name; // Set value as unique identifier for easy retrieval
+    option.textContent = storage.name;
+    collectionSelect.appendChild(option);
+  });
+}
+
+
 // ---------------------------------------------------------------------------------------------
 // Controller / Logic Layer
 // assets.js
@@ -205,6 +219,11 @@ function showAssetDetails(AssetId) {
   document.getElementById("details").innerHTML = modal;
 }
 
+
 render_reset = setInterval(()=>{
     render();
 },1000)
+
+populateDropdown('location', 'storage');
+populateDropdown('units', 'units');
+populateDropdown('category', 'assetCategory');

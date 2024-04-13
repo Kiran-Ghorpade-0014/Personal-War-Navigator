@@ -153,7 +153,7 @@ function processCards() {
   unitsData.forEach((unit) => {
     cards += `
                 <div class="btn btn-lg hstack justify-content-between text-start text-light bg-component shadow">
-                    <h4 href="../tasks/category.html" class=" text-start fw-bold"> ${
+                    <h4 class=" text-start fw-bold"> ${
                       unit.name
                     } </h4>
                     <div class="hstack gap-2 justify-content-around">

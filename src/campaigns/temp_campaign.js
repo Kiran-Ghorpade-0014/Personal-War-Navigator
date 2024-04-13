@@ -45,6 +45,28 @@ function setNestedProperty(obj, path, value) {
   obj[path.pop()] = value;
 }
 
+function populateDropdown(element_id, collection) {
+  const collectionSelect = document.getElementById(element_id);
+  collectionSelect.innerHTML = "";
+  let collectionData = [];
+
+  // Assume storagesData is an array of storage objects fetched from localStorage
+  // if collection is string , fetch from string
+  if (collection instanceof String || typeof collection === 'string') {
+    collectionData = readAllItems(collection);
+  } else {
+    collectionData = collection;
+  }
+
+  collectionData.forEach((item) => {
+    const option = document.createElement("option");
+    option.value = item.name; // Set value as unique identifier for easy retrieval
+    option.textContent = item.name;
+    collectionSelect.appendChild(option);
+  });
+}
+
+
 // ---------------------------------------------------------------------------------------------
 // Controller / Logic Layer
 // campaigns.js
@@ -82,7 +104,6 @@ function handleCampaignForm(event) {
   const formData = new FormData(form);
   const newCampaign = {};
   newCampaign.status = "";
-  newCampaign.missions = [];
   newCampaign.progress = {};
 
   formData.forEach((value, key) => {

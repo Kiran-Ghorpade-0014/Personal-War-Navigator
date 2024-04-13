@@ -71,21 +71,20 @@
         <div class="container-fluid d-flex justify-content-center" style="margin-top: 75px;">
             <div id="tasksBar" class="flex-wrap hstack gap-3 mt-3">
                 <div class="card bg-component" style="width:22rem;">
-                    <div class="card-body text-light shadow">
+                    <div class="card-body vstack gap-2 text-light shadow">
                         <div class="hstack justify-content-between">
-                            <span class="placeholder col-3 bg-warning"></span>
+                            <span class="placeholder col-3"></span>
                             <span class="placeholder col-3"></span>
                         </div>
-                        <h6 class="card-subtitle mt-2 mb-2"><span class="placeholder col-3"></span></h6>
-                        <div class="progress mb-2" role="progressbar" aria-label="Animated striped example"
-                            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                        <div class="hstack justify-content-between">
+                            <span class="placeholder col-6 bg-danger"></span>
 
+                            <div class="hstack gap-2 justify-content-around">
+                                <span class="btn btn-sm disabled placeholder col-3 bg-light"></span>
+                                <span class="btn btn-sm disabled placeholder col-3 bg-dark"></span>
+                            </div>
                         </div>
-                        <div class="mt-3 hstack gap-1">
-                            <a class="d-inline btn btn-sm btn-dark bg-component disabled placeholder col-4"> </a>
-                            <a class="d-inline btn btn-sm btn-light disabled placeholder col-4"> </a>
-                            <a class="d-inline btn btn-sm btn-warning disabled placeholder col-4"></a>
-                        </div>
+                        <span class="btn btn-sm bg-warning placeholder col-3"></span>
                     </div>
                 </div>
             </div>
@@ -143,12 +142,12 @@
                     <form id="taskForm" class="form" onchange="populateMissionsDropdown()"
                         onsubmit="handleTaskFormSubmit(event); return false;">
                         <label for="campaignSelect">Select Campaign:</label>
-                        <select id="campaignSelect" class="form-control" required>
+                        <select id="campaignSelect" class="form-control" name="campaign" onchange="populateMissionsDropdown()" required>
                             <option value="">Select Campaign:</option>
                             <!-- Options populated dynamically using JavaScript -->
                         </select><br>
                         <label for="missionSelect">Select Mission:</label>
-                        <select id="missionSelect" class="form-control" required>
+                        <select id="missionSelect" class="form-control" name="mission" required>
                             <!-- Options populated dynamically based on selected campaign using JavaScript -->
                         </select><br>
                         <label for="taskName">Task Name:</label>
@@ -156,22 +155,18 @@
                         <label for="taskDescription">Task Description:</label>
                         <textarea id="taskDescription" class="form-control" name="description" required></textarea><br>
                         <!-- <label for="taskStatus">Status:</label>
-                            <select id="taskStatus" class="form-control" name="status">
-                                <option value="Planned">Planned</option>
-                                <option value="In Progress">In Progress</option>
-                                <option value="Completed">Completed</option>
                             </select><br> -->
-                            <label for="assetSelect">Select Assets:</label>
-                            <select id="assetSelect" class="form-control" name="assets" required>
-                                <option value="">choose asset</option>
-                            </select><br>
-                            <label for="taskDescription"> Asset Updation Value :</label>
-                            <input id="taskDescription" class="form-control" name="update_value" required></input><br>
-                            <label for="updation_method"> Updation Method:</label>
-                            <select id="updation_method" class="form-control" name="update_method">
-                                <option value="-">Pull</option>
-                                <option value="+">Push</option>
-                            </select><br>
+                        <label for="assetSelect">Select Assets:</label>
+                        <select id="assetSelect" class="form-control" name="assets" required>
+                            <option value="">choose asset</option>
+                        </select><br>
+                        <label for="taskDescription"> Asset Updation Value :</label>
+                        <input id="taskDescription" class="form-control" name="update_value" required></input><br>
+                        <label for="updation_method"> Updation Method:</label>
+                        <select id="updation_method" class="form-control" name="update_method">
+                            <option value="-">Pull</option>
+                            <option value="+">Push</option>
+                        </select><br>
                         <button type="submit" class="form-control btn btn-primary">Create Task</button>
                     </form>
                 </div>

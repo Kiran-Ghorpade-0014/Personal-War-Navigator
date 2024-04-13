@@ -69,34 +69,46 @@
         <div class="container-fluid d-flex justify-content-around align-items-center flex-wrap gap-3"
             style="margin-top: 75px;">
             <div id="assetBar" class="flex-wrap hstack gap-3 mt-3">
-                <div class="card  bg-component" style="width: 10rem;">
-                    <div class="card-body text-dark shadow">
-                        <h5 class="card-title text-center"> <span class="placeholder col-6"></span> </h5>
-                        <h6 class="card-subtitle mt-2 text-warning text-center"> <span class="placeholder col-6"></span> </h6>
-                        <div class="progress mt-2" role="progressbar" aria-label="Animated striped example"
-                        aria-valuenow="${currentPercentage}" aria-valuemin="0" aria-valuemax="100">
-                        <span class="placeholder col-6"></span>
+               
+                <div class="card bg-component" style="width: 10rem;">
+                    <div class="card-body vstack gap-2 text-light shadow">
+                        <div class="hstack gap-2 justify-content-around">
+                            <h5 class="card-title placeholder col-3 text-light text-center"></h5>
+                            <span class="card-subtitle placeholder col-3 text-light text-center"> </span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-label="Animated striped example"
+                        aria-valuenow="${currentPercentage}" style="height: 0.5rem;" aria-valuemin="0" aria-valuemax="100">
+                            <span class="placeholder bg-success col-12"></span>
                         </div>    
-                        <div class="progress mt-2 text-center" role="progressbar" aria-label="Animated striped example"
-                        aria-valuenow="${deadlinePercentage}" aria-valuemin="10" aria-valuemax="100">
-                        <span class="placeholder col-6"></span>
-                        </div>    
-                        <span class="placeholder col-6 bg-warning"></span>
+                        <div class="progress text-center" role="progressbar" aria-label="Animated striped example"
+                        aria-valuenow="${deadlinePercentage}" style="height: 0.5rem;" aria-valuemin="10" aria-valuemax="100">
+                            <span class="placeholder bg-primary col-12"></span>
+                        </div>
+                        <div class="hstack gap-2 justify-content-around">
+                            <span class="d-inline placeholder col-3 disabled btn btn-sm btn-light">  </span>
+                            <span class="d-inline placeholder col-3 disabled btn btn-sm btn-dark">  </span>
+                        </div>
                     </div>
                 </div>
-                <div class="card  bg-component" style="width: 10rem;">
-                    <div class="card-body text-dark shadow">
-                        <h5 class="card-title text-center"> <span class="placeholder col-6"></span> </h5>
-                        <h6 class="card-subtitle mt-2 text-warning text-center"> <span class="placeholder col-6"></span> </h6>
-                        <div class="progress mt-2" role="progressbar" aria-label="Animated striped example"
-                        aria-valuenow="${currentPercentage}" aria-valuemin="0" aria-valuemax="100">
-                        <span class="placeholder col-6"></span>
+
+                <div class="card bg-component" style="width: 10rem;">
+                    <div class="card-body vstack gap-2 text-light shadow">
+                        <div class="hstack gap-2 justify-content-around">
+                            <h5 class="card-title placeholder col-3 text-light text-center"></h5>
+                            <span class="card-subtitle placeholder col-3 text-light text-center"> </span>
+                        </div>
+                        <div class="progress" role="progressbar" aria-label="Animated striped example"
+                        aria-valuenow="${currentPercentage}" style="height: 0.5rem;" aria-valuemin="0" aria-valuemax="100">
+                            <span class="placeholder bg-success col-12"></span>
                         </div>    
-                        <div class="progress mt-2 text-center" role="progressbar" aria-label="Animated striped example"
-                        aria-valuenow="${deadlinePercentage}" aria-valuemin="10" aria-valuemax="100">
-                        <span class="placeholder col-6"></span>
-                        </div>    
-                        <span class="placeholder col-6 bg-warning"></span>
+                        <div class="progress text-center" role="progressbar" aria-label="Animated striped example"
+                        aria-valuenow="${deadlinePercentage}" style="height: 0.5rem;" aria-valuemin="10" aria-valuemax="100">
+                            <span class="placeholder bg-primary col-12"></span>
+                        </div>
+                        <div class="hstack gap-2 justify-content-around">
+                            <span class="d-inline placeholder col-3 disabled btn btn-sm btn-light">  </span>
+                            <span class="d-inline placeholder col-3 disabled btn btn-sm btn-dark">  </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -123,12 +135,24 @@
                         <input type="text" class="form-control" id="totalstock" name="totalstock" required><br>
                         <label for="minimumStockLevel">Minimum Stock Level</label>
                         <input type="text" class="form-control" id="minimumStockLevel" name="minimumStockLevel" required><br>
-                        <label for="unit"> Unit</label>
-                        <input type="text" class="form-control" id="unit" name="unit" required><br>
-                        <label for="location">End Time</label>
+                        <!-- <label for="type"> Type</label>
+                        <select id="type" class="form-control" name="type" required>
+                            <option value="">choose asset</option>
+                        </select><br> -->
+                        <label for="category"> Category</label>
+                        <select id="category" class="form-control" name="category" required>
+                            <option value="">choose asset</option>
+                        </select><br>
+                        <label for="units"> Unit</label>
+                        <select id="units" class="form-control" name="units" required>
+                            <option value="">choose asset</option>
+                        </select><br>
+                        <label for="end_time">End Time</label>
                         <input type="datetime-local" class="form-control" id="end_time" name="end_time" required><br>
                         <label for="location">Location for storage</label>
-                        <input type="text" class="form-control" id="location" name="location" required><br>
+                        <select id="location" class="form-control" name="location" required>
+                            <option value="">choose asset</option>
+                        </select><br>
                         <button type="submit" class="form-control btn btn-primary">Create asset</button>
                     </form>
                 </div>

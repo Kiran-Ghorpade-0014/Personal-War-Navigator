@@ -44,26 +44,40 @@ function setNestedProperty(obj, path, value) {
   obj[path.pop()] = value;
 }
 
+function populateDropdown(element_id, collection) {
+  const collectionSelect = document.getElementById(element_id);
+  collectionSelect.innerHTML = "";
+  let collectionData = [];
+
+  // Assume storagesData is an array of storage objects fetched from localStorage
+  // if collection is string , fetch from string
+  if (collection instanceof String || typeof collection === 'string') {
+    collectionData = readAllItems(collection);
+  } else {
+    collectionData = collection;
+  }
+
+  collectionData.forEach((item) => {
+    const option = document.createElement("option");
+    option.value = item.name; // Set value as unique identifier for easy retrieval
+    option.textContent = item.name;
+    collectionSelect.appendChild(option);
+  });
+}
+
 // ---------------------------------------------------------------------------------------------
 // missions.js
 
 // Function to create a new mission for a campaign
-function createMission(campaignIndex, newMission) {
-  let campaigns = readAllItems("campaigns");
-  let missions = campaigns[campaignIndex].missions;
-  missions.push(newMission);
-  if (campaigns[campaignIndex]) {
-    updateItemProperty("campaigns", campaignIndex, "missions", missions);
-  } else {
-    console.error(`Campaign at index ${campaignIndex} not found.`);
-  }
+function createMission(newMission) {
+  createItem("missions", newMission)
   render();
 }
 
 // Function to read all missions of a campaign
 function readAllMissions(campaignIndex) {
-  let campaigns = readAllItems("campaigns");
-  return campaigns[campaignIndex]?.missions || [];
+  let missions = readAllItems("missions");
+  return missions;
 }
 
 // Function to update a specific property of a mission
@@ -78,30 +92,8 @@ function updateMissionProperty(campaignIndex, missionIndex, property, value) {
 }
 
 // Function to delete a mission from a campaign
-function deleteMission(campaignIndex, missionIndex) {
-  let campaigns = readAllItems("campaigns");
-  let missions = campaigns[campaignIndex].missions;
-  missions.splice(missionIndex,1);
-
-  if (campaigns[campaignIndex]) {
-    updateItemProperty("campaigns", campaignIndex, "missions", missions);
-  } else {
-    console.error(`Campaign at index ${campaignIndex} not found.`);
-  }
-  render();
-}
-
-function populateCampaignsDropdown() {
-  const campaignSelect = document.getElementById("campaignSelect");
-  //campaignsData is an array of campaign objects fetched from localStorage
-  let campaignsData = readAllItems("campaigns");
-
-  campaignsData.forEach((campaign, index) => {
-    const option = document.createElement("option");
-    option.value = index.toString(); // Set value as index for easy retrieval
-    option.textContent = campaign.name;
-    campaignSelect.appendChild(option);
-  });
+function deleteMission(missionIndex) {
+  deleteItem("missions", missionIndex);
   render();
 }
 
@@ -113,23 +105,19 @@ function handleMissionForm(event) {
   const formData = new FormData(form);
   const newMission = {};
   newMission.status = "";
-  newMission.tasks = [];
   newMission.progress = {};
 
   formData.forEach((value, key) => {
     newMission[key] = value;
   });
 
-  const campaignIndex = parseInt(
-    document.getElementById("campaignSelect").value
-  );
-  createMission(campaignIndex, newMission);
-
+  createMission(newMission);
   form.reset();
 }
 
-function handleDeleteClick(key, missionkey) {
+function handleDeleteClick(missionkey) {
   let value = confirm("Are you sure to stop this Mission !!!");
+  key = Math.floor(Math.random()*10);
 
   if (value == true) {
     let confirmvalue = confirm("Are you REALLY sure to stop this Mission !!!\nThis will Stop All Related Tasks also.");
@@ -139,7 +127,7 @@ function handleDeleteClick(key, missionkey) {
           prompt("This will Stop All Related Missions and Tasks also.\nWhat is Sum " + key + " + " + missionkey)||-1 ==
           missionkey + key
         ) {
-          deleteMission(key, missionkey);
+          deleteMission(missionkey);
           alert("Command Executed : Mission Stopped...");
         } else alert("Command to Stop Mission Aborted...");
       }
@@ -164,11 +152,10 @@ function render() {
 }
 
 function processCards() {
-  let campaignsData = readAllItems("campaigns");
+  let missionsData = readAllItems("missions");
 
-  cards = "";
-  campaignsData.forEach((campaign) => {
-    campaign.missions.forEach((mission) => {
+    cards = "";
+    missionsData.forEach((mission) => {
       cards += `
             <div class="card  bg-component" style="width:22rem;">
                 <div class="card-body vstack gap-2 text-dark shadow">
@@ -177,7 +164,7 @@ function processCards() {
                           mission.name
                         }
                         </h5>
-                        <h6 class="card-subtitle ">@${campaign.name}</h6>
+                        <h6 class="card-subtitle ">@${mission.campaign}</h6>
                     </div>
                     <div class="hstack justify-content-between">
                         <div class="card-title h6"> Status : ${
@@ -185,7 +172,7 @@ function processCards() {
                         }</div>
                         <div class="hstack gap-2 justify-content-around">
                             <button class="d-inline btn btn-sm btn-light"> ✏️ </button>
-                            <button class="d-inline btn btn-sm btn-dark" onClick="handleDeleteClick(${campaignsData.indexOf(campaign)}, ${campaign.missions.indexOf(mission)})"> 🗑️ </button>
+                            <button class="d-inline btn btn-sm btn-dark" onClick="handleDeleteClick(${missionsData.indexOf(mission)})"> 🗑️ </button>
                         </div>
                     </div>
                     <div class="progress  text-center" role="progressbar" aria-label="Animated striped example"
@@ -196,7 +183,6 @@ function processCards() {
             </div>
    `;
     });
-  });
 
   return cards;
 }
@@ -205,4 +191,4 @@ render_reset = setInterval(()=>{
   render();
 },1000)
 
-populateCampaignsDropdown();
+populateDropdown('campaignSelect', 'campaigns');
