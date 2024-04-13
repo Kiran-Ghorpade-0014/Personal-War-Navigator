@@ -3,6 +3,11 @@ let tasks = [];
 let assets = [];
 let resources = [];
 
+// Function to read all items from the specified collection
+function filterByProperty(collection, property, value) {
+    return collection.filter((mission) => mission[property] === value);
+  }  
+
 // Function to retrieve current task
 function getCurrentTask() {
     const currentTime = new Date();

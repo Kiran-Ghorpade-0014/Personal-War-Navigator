@@ -12,6 +12,11 @@ function createItem(collection, newItem) {
     return JSON.parse(localStorage.getItem(collection)) || [];
   }
   
+  // Function to read all items from the specified collection
+function filterByProperty(collection, property, value) {
+  return collection.filter((mission) => mission[property] === value);
+}
+
   // Function to update a specific property of an item in the specified collection
   function updateItemProperty(collection, itemIndex, property, value) {
     let items = JSON.parse(localStorage.getItem(collection)) || [];

@@ -11,6 +11,11 @@ function readAllItems(collection) {
   return JSON.parse(localStorage.getItem(collection)) || [];
 }
 
+// Function to read all items from the specified collection
+function filterByProperty(collection, property, value) {
+  return collection.filter((mission) => mission[property] === value);
+}
+
 // Function to update a specific property of an item in the specified collection
 function updateItemProperty(collection, itemIndex, property, value) {
   let items = JSON.parse(localStorage.getItem(collection)) || [];
@@ -158,7 +163,7 @@ function processCards() {
     missionsData.forEach((mission) => {
       cards += `
             <div class="card  bg-component" style="width:22rem;">
-                <div class="card-body vstack gap-2 text-dark shadow">
+                <div class="card-body vstack gap-2 text-light shadow">
                     <div class="hstack gap-2 justify-content-between">
                         <h5 class="card-title" data-bs-toggle="modal" data-bs-target="#campaignDetails"> ${
                           mission.name

@@ -56,7 +56,7 @@ function populateDropdown(element_id, collection) {
 
   // Assume storagesData is an array of storage objects fetched from localStorage
   // if collection is string , fetch from string
-  if (collection instanceof String || typeof collection === 'string') {
+  if (collection instanceof String || typeof collection === "string") {
     collectionData = readAllItems(collection);
   } else {
     collectionData = collection;
@@ -85,11 +85,10 @@ function readAllCategories() {
 }
 
 // Function to update a specific property of a Task
-function updateTaskProperty(taskIndex, event) {
+function updateTaskProperty(taskIndex, event, formname,property) {
   event.preventDefault();
-  let value = document.forms["updateTaskForm"]["name"].value;
-  console.log(value);
-  updateItemProperty("tasks", taskIndex, "name", value);
+  let value = document.forms[formname][property].value;
+  updateItemProperty("tasks", taskIndex, property, value);
   render();
 }
 
@@ -127,7 +126,7 @@ function handleTaskFormSubmit(event) {
   const form = document.getElementById("taskForm");
   const formData = new FormData(form);
   const newTask = {};
-  newTask.status = "";
+  newTask.status = "waiting";
   // newTask.start_time = new Date();
 
   formData.forEach((value, key) => {
@@ -137,6 +136,26 @@ function handleTaskFormSubmit(event) {
   createTask(newTask);
 
   form.reset();
+}
+
+// Handle Update of existing Category
+function handleStatusUpdateClick(index) {
+  let form = document.getElementById('statusUpdateCategoryForm');
+
+  modal = `
+        <form id="statusUpdateCategoryForm" class="form text-light" action="#" onsubmit="updateTaskProperty(${index}, event,'statusUpdateCategoryForm', 'status'); return false;">
+            <label for="Status">Change Status :</label>
+            <select id="Status" class="form-control" name="status">
+                <option value="waiting">waiting</option>
+                <option value="pending">pending</option>
+                <option value="completed">completed</option>
+            </select><br>
+            <button type="submit" class="form-control btn btn-primary" data-bs-toggle="modal" data-bs-target="#statusUpdateFormModal" >Update Category</button>
+        </form>
+    `;
+
+  const modalForm = document.getElementById("statusUpdateCategoryForm");
+  modalForm.outerHTML = modal;
 }
 
 function handleDeleteClick(taskindex) {
@@ -171,6 +190,12 @@ function handleDeleteClick(taskindex) {
 
 const tasksBar = document.getElementById("tasksBar");
 let cache_element = "";
+let statusValue = 'waiting';
+
+function filterCards(element){
+  statusValue = element.value;
+  render();
+}
 
 function render() {
   let element = processCards();
@@ -183,11 +208,13 @@ function render() {
 function processCards() {
   let tasksData = readAllItems("tasks");
 
+  tasksData = filterByProperty(tasksData, 'status', statusValue);
+
   cards = "";
   tasksData.forEach((task) => {
     cards += `
             <div class="card bg-component" style="width:22rem;">
-                <div class="card-body text-dark shadow">
+                <div class="card-body text-light shadow">
                     <div class="d-flex align-items-center justify-content-between">
                         <h5 class="card-title" data-bs-toggle="modal" data-bs-target="#campaignDetails"> ${
                           task.name
@@ -204,9 +231,9 @@ function processCards() {
                               task
                             )})"> 🗑️ </button>
                             <button class="d-inline btn btn-sm btn-light"> ✏️ </button>
+                            <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#statusUpdateFormModal" onClick="handleStatusUpdateClick(${tasksData.indexOf(task)})">📢</button>
                         </div>
                     </div>
-                    <button class="btn btn-sm btn-warning ">Report Status</button>
                 </div>
             </div>
    `;

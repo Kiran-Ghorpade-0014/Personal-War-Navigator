@@ -59,7 +59,14 @@
                 <li class="nav-item">
                     <h1>Tasks</h1>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item hstack gap-2">
+                    <select class="form-select bg-secondary text-warning border-0" aria-label="Default select example"
+                        onchange="filterCards(this)">
+                        <option value="waiting" selected>waiting</option>
+                        <option value="pending">pending</option>
+                        <option value="completed">completed</option>
+                    </select>
+
                     <button type="button" class="btn btn-warning  pt-1 rounded-pill" data-bs-toggle="modal"
                         data-bs-target="#formModal"> + </button>
                 </li>
@@ -92,11 +99,11 @@
     </div>
 
     <!-- Modal TaskDetails -->
-    <div class="modal fade" id="taskDetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="taskDetails" tabindex="-1" aria-labelledby="modal-header" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-dark bg-component">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5 text-dark" id="exampleModalLabel">Add New mission</h1>
+                    <h1 class="modal-title fs-5 text-dark" id="modal-header">Add New mission</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -142,7 +149,8 @@
                     <form id="taskForm" class="form" onchange="populateMissionsDropdown()"
                         onsubmit="handleTaskFormSubmit(event); return false;">
                         <label for="campaignSelect">Select Campaign:</label>
-                        <select id="campaignSelect" class="form-control" name="campaign" onchange="populateMissionsDropdown()" required>
+                        <select id="campaignSelect" class="form-control" name="campaign"
+                            onchange="populateMissionsDropdown()" required>
                             <option value="">Select Campaign:</option>
                             <!-- Options populated dynamically using JavaScript -->
                         </select><br>
@@ -160,8 +168,8 @@
                         <select id="assetSelect" class="form-control" name="assets" required>
                             <option value="">choose asset</option>
                         </select><br>
-                        <label for="taskDescription"> Asset Updation Value :</label>
-                        <input id="taskDescription" class="form-control" name="update_value" required></input><br>
+                        <label for="update_value"> Asset Updation Value :</label>
+                        <input id="update_value" class="form-control" name="update_value" required></input><br>
                         <label for="updation_method"> Updation Method:</label>
                         <select id="updation_method" class="form-control" name="update_method">
                             <option value="-">Pull</option>
@@ -173,6 +181,21 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Status Update Form -->
+    <div class="modal fade" id="statusUpdateFormModal" tabindex="-1" aria-labelledby="staticBackdropLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-component">
+                <div class="modal-body text-light">
+                    <form id="statusUpdateCategoryForm" class="form text-light" action="#"
+                        onsubmit="handleUpdate(event); return false;">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end -->
 
     <!-- bootstrap js -->
     <script src="/bootstrap/js/bootstrap.min.js"></script>
