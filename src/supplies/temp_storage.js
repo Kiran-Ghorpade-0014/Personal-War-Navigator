@@ -51,13 +51,13 @@ function createItem(collection, newItem) {
   
   // Function to create a new Category
   function createCategory(newCategory) {
-    createItem("campaignCategory", newCategory);
+    createItem("storage", newCategory);
     render();
   }
   
-  // Function to read all Categories
+  // Function to read all Categorys
   function readAllCategories() {
-    return readAllItems("campaignCategory");
+    return readAllItems("storage");
   }
   
   // Function to update a specific property of a Category
@@ -66,13 +66,13 @@ function createItem(collection, newItem) {
     let value = document.forms["updateCategoryForm"]["name"].value;
       console.log(value);
     console.log(categoryIndex+" "+value);
-    updateItemProperty("campaignCategory", categoryIndex, 'name', value);
+    updateItemProperty("storage", categoryIndex, 'name', value);
     render();
   }
   
   // Function to delete a Category
   function deleteCategory(categoryIndex) {
-    deleteItem("campaignCategory", categoryIndex);
+    deleteItem("storage", categoryIndex);
     render();
   }
   
@@ -97,9 +97,9 @@ function createItem(collection, newItem) {
   
       modal = `
           <form id="updateCategoryForm" class="form text-light" action="#" onsubmit="updateCategoryProperty(${index}, event); return false;">
-              <label for="categoryName">Category Name:</label>
+              <label for="categoryName">Storage Name:</label>
               <input type="text" class="form-control" id="categoryName" name="name" value="${name}" required><br>
-              <button type="submit" class="form-control btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateFormModal" >Update Category</button>
+              <button type="submit" class="form-control btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateFormModal">Update Storage</button>
           </form>
       `
   
@@ -109,10 +109,10 @@ function createItem(collection, newItem) {
   
   // Delete Existing Category
   function handleDeleteClick(key) {
-    let value = confirm("Are you sure to delete this Category !!!");
+    let value = confirm("Are you sure to delete this Storage !!!");
   
     if (value == true) {
-      let confirmvalue = confirm("Are you REALLY sure to delete this Category !!!");
+      let confirmvalue = confirm("Are you REALLY sure to delete this Storage !!!");
       if (value == confirmvalue) {
         if (confirmvalue == true) {
           if (
@@ -123,8 +123,8 @@ function createItem(collection, newItem) {
             -1 == 2 + key
           ) {
             deleteCategory(key);
-            alert("Command Executed : Category Deleted...");
-          } else alert("Command to delete Category Aborted...");
+            alert("Command Executed : Storage Deleted...");
+          } else alert("Command to delete Storage Aborted...");
         }
       }
     }

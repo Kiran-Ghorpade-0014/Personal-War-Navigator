@@ -55,7 +55,7 @@
         <nav class="navbar fixed-top bg-component bg-gradient">
             <ul class="navbar-nav text-warning d-flex flex-row align-items-center justify-content-between w-100 mx-2">
                 <li class="nav-item">
-                    <h1> Campaign Category </h1>
+                    <h1> Unit of Measure</h1>
                 </li>
                 <li class="nav-item">
                     <button type="button" class="btn btn-warning  pt-1 rounded-pill" data-bs-toggle="modal"
@@ -65,7 +65,7 @@
         </nav>
 
         <!-- Main -->
-        <div id="categoryBar" class="container-fluid vstack gap-2 " style="margin-top: 75px;"> 
+        <div id="unitBar" class="container-fluid vstack gap-2 " style="margin-top: 75px;"> 
 
         </div>
 
@@ -76,9 +76,9 @@
                     <div class="modal-body text-light">
                         <form id="categoryForm" class="form text-light" action="#"
                             onsubmit="handleCategoryForm(event); return false;">
-                            <label for="categoryName">Category Name:</label>
-                            <input type="text" class="form-control" id="categoryName" name="name" required><br>
-                            <button type="submit" class="form-control btn btn-primary">Create Category</button>
+                            <label for="unitName">Unit Name:</label>
+                            <input type="text" class="form-control" id="unitName" name="name" required><br>
+                            <button type="submit" class="form-control btn btn-primary">Create Unit</button>
                         </form>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
 
         <!-- bootstrap js -->
         <script src="/bootstrap/js/bootstrap.min.js"></script>
-        <script src="../campaigns/temp_catorgory.js"></script>
+        <script src="../supplies/temp_unit.js"></script>
 </body>
 
 </html>

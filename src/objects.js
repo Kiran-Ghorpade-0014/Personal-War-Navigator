@@ -1,49 +1,46 @@
-export const priority = {
-  LOW,
-  MEDIUM,
-  HIGH,
-};
+export const priority = [
+  { name: "LOW" },
+  { name: "MEDIUM" },
+  { name: "HIGH" },
+];
 
-export const status = {
-  NOT_STARTED,
-  STARTED,
-  WAITING,
-  COMPLETED,
-};
+export const status = [
+  { name: "NOT_STARTED" },
+  { name: "STARTED" },
+  { name: "WAITING" },
+  { name: "COMPLETED" },
+];
 
-export const campaign_type = {
-  GLOBAL,
-  LOCAL,
-  JOINT,
-};
+export const campaign_categories = [
+  { name: "GLOBAL" , type:"none"},
+  { name: "LOCAL" , type:"none"},
+  { name: "JOINT" , type:"none"},
+];
 
-export const mission_type = {
-  combat: {
-    OFFENSIVE,
-    DEFENSE,
-    DETERRANCE,
-    COUNTER_INSURGENCY,
-    RECONNAISSANCE,
-    PEACEKEEPING,
-  },
-  support: {
-    LOGISTIC,
-    MEDICAL,
-    ENGINEERING,
-    INTELIIGENCE,
-    COMMUNICATION,
-  },
-  training: {
-    PHYSICAL_TRAINING,
-    INDIVIDUAL_TRAINING,
-    UNIT_TRAINING,
-    JOINT_TRAINING,
-    SPECIALIZED_TRAINING,
-  },
-  SPECIAL_MISSION,
-};
+export const mission_categories = [
+    { name: "OFFENSIVE", type:"Combat" },
+    { name: "DEFENSE", type:"Combat" },
+    { name: "DETERRANCE", type:"Combat" },
+    { name: "COUNTER_INSURGENCY", type:"Combat" },
+    { name: "RECONNAISSANCE", type:"Combat" },
+    { name: "PEACEKEEPING", type:"Combat" },
 
-export const task_type = {
+    { name: "LOGISTIC", type:"Support" },
+    { name: "MEDICAL", type:"Support" },
+    { name: "ENGINEERING", type:"Support" },
+    { name: "INTELIIGENCE", type:"Support" },
+    { name: "COMMUNICATION", type:"Support" },
+
+    { name: "PHYSICAL_TRAINING", type:"training" },
+    { name: "INDIVIDUAL_TRAINING", type:"training" },
+    { name: "UNIT_TRAINING", type:"training" },
+    { name: "JOINT_TRAINING", type:"training" },
+    { name: "SPECIALIZED_TRAINING", type:"training" },
+    
+    { name: "SPECIAL_MISSION", type:"SPECIAL_MISSION"}
+];
+
+export const task_categories = {
   combat: {
     ASSAULT,
     MOVEMENT_OF_CONTACT,

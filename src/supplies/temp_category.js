@@ -51,13 +51,13 @@ function createItem(collection, newItem) {
   
   // Function to create a new Category
   function createCategory(newCategory) {
-    createItem("campaignCategory", newCategory);
+    createItem("assetCategory", newCategory);
     render();
   }
   
-  // Function to read all Categories
+  // Function to read all Categorys
   function readAllCategories() {
-    return readAllItems("campaignCategory");
+    return readAllItems("assetCategory");
   }
   
   // Function to update a specific property of a Category
@@ -66,13 +66,13 @@ function createItem(collection, newItem) {
     let value = document.forms["updateCategoryForm"]["name"].value;
       console.log(value);
     console.log(categoryIndex+" "+value);
-    updateItemProperty("campaignCategory", categoryIndex, 'name', value);
+    updateItemProperty("assetCategory", categoryIndex, 'name', value);
     render();
   }
   
   // Function to delete a Category
   function deleteCategory(categoryIndex) {
-    deleteItem("campaignCategory", categoryIndex);
+    deleteItem("assetCategory", categoryIndex);
     render();
   }
   
@@ -99,7 +99,7 @@ function createItem(collection, newItem) {
           <form id="updateCategoryForm" class="form text-light" action="#" onsubmit="updateCategoryProperty(${index}, event); return false;">
               <label for="categoryName">Category Name:</label>
               <input type="text" class="form-control" id="categoryName" name="name" value="${name}" required><br>
-              <button type="submit" class="form-control btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateFormModal" >Update Category</button>
+              <button type="submit" class="form-control btn btn-primary"  data-bs-toggle="modal" data-bs-target="#updateFormModal">Update Category</button>
           </form>
       `
   

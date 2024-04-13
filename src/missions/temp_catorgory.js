@@ -51,13 +51,13 @@ function createItem(collection, newItem) {
   
   // Function to create a new Category
   function createCategory(newCategory) {
-    createItem("campaignCategory", newCategory);
+    createItem("missionCategory", newCategory);
     render();
   }
   
-  // Function to read all Categories
+  // Function to read all Categorys
   function readAllCategories() {
-    return readAllItems("campaignCategory");
+    return readAllItems("missionCategory");
   }
   
   // Function to update a specific property of a Category
@@ -66,13 +66,13 @@ function createItem(collection, newItem) {
     let value = document.forms["updateCategoryForm"]["name"].value;
       console.log(value);
     console.log(categoryIndex+" "+value);
-    updateItemProperty("campaignCategory", categoryIndex, 'name', value);
+    updateItemProperty("missionCategory", categoryIndex, 'name', value);
     render();
   }
   
   // Function to delete a Category
   function deleteCategory(categoryIndex) {
-    deleteItem("campaignCategory", categoryIndex);
+    deleteItem("missionCategory", categoryIndex);
     render();
   }
   
